@@ -1,0 +1,54 @@
+<!DOCTYPE html><html>
+<meta charset="utf-8" />
+<head>
+	<script src="https://unpkg.com/leaflet@1.0.2/dist/leaflet.js"></script>
+	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.2/dist/leaflet.css" />
+<title>Worldwide</title>
+ <style>
+  #map { 
+  width: 600px;
+  height: 400px; }
+ </style>
+ 
+ </head>
+  <body>
+   <div id="map"></div>
+ <script>
+ 
+var map = L.map('map').
+setView([35.8205703, -48.6245318], 
+13);
+
+var LeafIcon = L.Icon.extend({
+    options: {
+        iconSize:     [38, 40],
+        shadowSize:   [50, 64],
+        iconAnchor:   [22, 22],
+        shadowAnchor: [4, 62],
+        popupAnchor:  [-3, -76]
+    }
+});
+ 
+var datos = new LeafIcon({iconUrl: 'assets/img/datos.png'}),
+    support = new LeafIcon({iconUrl: 'assets/img/support.png'}),
+    orangeIcon = new LeafIcon({iconUrl: 'leaf-orange.png'});
+
+L.icon = function (options) {
+    return new L.Icon(options);
+};
+
+L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="https://albertosaenz.com/">Alberto Sáenz</a>, Host © <a href="http://multihostexpress.com">Multi Host Express</a>',
+    maxZoom: 2
+}).addTo(map);
+
+L.control.scale().addTo(map);
+
+L.marker([41.8625541, -87.6431551], {icon: datos}).addTo(map).bindPopup("Data Center" + "<br/>" + "CoreSite’s Chicago (CH1)" + "<br/>" +"coresite.com");
+L.marker([37.3342022, -121.8936747], {icon: datos}).addTo(map).bindPopup("Data Center" + "<br/>" + "CoreSite’s San Jose (SV1)" + "<br>" + "coresite.com");
+L.marker([42.702739, 23.3040701], {icon: datos}).addTo(map).bindPopup("Data Center" + "<br/>" + "Telepoint, Sofía BL" + "<br>" + "telepoint.bg");
+L.marker([40.0513864, -76.9684253], {icon: support}).addTo(map).bindPopup("USA" + "<br/>" + "1(640)500-1084" + "<br>" + "New Jersey");
+L.marker([9.998352, -84.1306463], {icon: support}).addTo(map).bindPopup("LATAM" + "<br/>" + "(506)6252-1665" + "<br>" + "Heredia CRC");
+ </script>
+ </body> 
+ </html>
